@@ -1,0 +1,32 @@
+.map-view {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.custom-marker {
+  background: none;
+  border: none;
+}
+
+.marker-popup h3 {
+  margin: 0 0 10px 0;
+  color: #2e7d32;
+  font-size: 1.1rem;
+}
+
+.marker-popup p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.marker-popup img {
+  max-width: 200px;
+  object-fit: cover;
+}

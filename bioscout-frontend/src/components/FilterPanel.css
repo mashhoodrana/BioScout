@@ -1,0 +1,93 @@
+.filter-panel {
+  position: absolute;
+  left: 20px;
+  top: 80px;
+  width: 280px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  user-select: none;
+}
+
+.filter-title {
+  margin: 0 0 8px 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  cursor: grab;
+  padding: 2px 0;
+  transition: color 0.2s ease;
+}
+
+.filter-title:hover {
+  color: #2e7d32;
+}
+
+.filter-title:active {
+  cursor: grabbing;
+}
+
+.filter-section {
+  margin-bottom: 10px;
+}
+
+.filter-section:last-child {
+  margin-bottom: 0;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filter-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.filter-btn {
+  padding: 8px 12px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+  flex: 0 1 auto;
+}
+
+.filter-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.filter-btn.active {
+  background-color: #2e7d32;
+  color: white;
+  border-color: #1b5e20;
+}
+
+.filter-btn.type-btn {
+  font-size: 0.8rem;
+  padding: 8px 10px;
+}
+
+.filter-info {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.filter-info p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #999;
+}

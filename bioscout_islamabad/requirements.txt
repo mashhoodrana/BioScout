@@ -1,0 +1,35 @@
+# Web framework
+flask==2.3.3
+flask-cors==4.0.0
+werkzeug==3.0.1
+
+# Database
+flask-sqlalchemy==3.0.5
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.21
+
+# Authentication
+flask-jwt-extended==4.5.2
+bcrypt==4.0.1
+
+# Environment and configuration
+python-dotenv==1.0.0
+
+# Image processing
+Pillow==10.0.0
+
+# Data handling
+numpy>=1.24.0
+
+# Requests and utilities
+requests==2.31.0
+requests-toolbelt==1.0.0
+python-dateutil==2.8.2
+
+# OpenAI integration
+openai>=1.0.0
+
+# Optional: RAG system (comment out if not needed)
+# llama-index-core>=0.9.41
+# llama-index-embeddings-openai>=0.1.5
+# llama-index-llms-openai>=0.1.5 

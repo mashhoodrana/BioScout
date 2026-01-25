@@ -1,0 +1,84 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+*.env.local
+*.env.*.local
+.env.production.local
+.env.development.local
+.env.test.local
+*.db
+*.sqlite3
+*.sqlite
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+build/
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# Python virtual environment
+venv/
+env/
+ENV/
+.venv
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+data/*.csv
+data/observation_index_log.json
+
+# Sensitive configuration files
+bioscout_islamabad/config.py
+bioscout_islamabad/.env
+bioscout_islamabad/.env.*
+bioscout-frontend/.env
+bioscout-frontend/.env.local
+
+# Test files that might contain credentials
+bioscout_islamabad/test_inaturalist.py
+bioscout_islamabad/quick_test.py
+
+# Setup and documentation with sensitive examples
+bioscout_islamabad/init_db.py
+bioscout_islamabad/QUICK_START.md
+bioscout_islamabad/VSCODE_DATABASE_SETUP.md
+bioscout_islamabad/DATABASE_SETUP.md
+
+# Local development files
+bioscout_islamabad/fix_numpy.py
+setup_dev.sh
+
+# Logs and temporary files
+*.log
+*.pot
+*.bak
+*.tmp
+.pytest_cache/
+.coverage
+htmlcov/
+
+# API keys and credentials (specific patterns)
+*_keys.py
+*_secrets.py
+*_credentials.py
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini

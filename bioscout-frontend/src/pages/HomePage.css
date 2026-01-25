@@ -1,0 +1,33 @@
+.home-page {
+  height: calc(100vh - 60px);
+  position: relative;
+}
+
+.map-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.error-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 12px 20px;
+  text-align: center;
+  z-index: 1000;
+  border-bottom: 2px solid #c62828;
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1.2rem;
+  color: #666;
+}
