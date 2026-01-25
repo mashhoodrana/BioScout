@@ -1,311 +1,435 @@
-# Frontend-Backend Integration Complete ✅
+# BioScout 🌿🦋
 
-## Status: FULLY FUNCTIONAL
+> An intelligent biodiversity observation and species identification platform for Islamabad, Pakistan.
 
-All connections between React frontend and PostgreSQL backend are working correctly. Every signup, login, and chat message is now stored in the database.
+## Overview
 
----
-
-## What Was Done
-
-### 1. API Service Layer Updated (`src/services/api.js`)
-
-- ✅ Changed base URL from `/api` (proxy) to `http://localhost:5001/api` (direct)
-- ✅ Added JWT interceptor to include `Authorization: Bearer <token>` header on all requests
-- ✅ Added 401 error handler to redirect to login on token expiry
-- ✅ Added 6 new authentication endpoints:
-  - `registerUser(email, name, password, confirmPassword)` → POST /api/auth/register
-  - `loginUser(email, password)` → POST /api/auth/login
-  - `logoutUser()` → POST /api/auth/logout
-  - `getCurrentUser()` → GET /api/auth/me
-- ✅ Added 5 chat endpoints:
-  - `getConversations()` → GET /api/chats
-  - `createConversation(firstMessage, assistantResponse)` → POST /api/chats
-  - `getConversation(conversationId)` → GET /api/chats/{id}
-  - `addMessageToConversation(conversationId, message, response)` → POST /api/chats/{id}/messages
-  - `deleteConversation(conversationId)` → DELETE /api/chats/{id}
-
-### 2. Authentication Context Updated (`src/context/AuthContext.jsx`)
-
-- ✅ Replaced localStorage-only approach with API calls
-- ✅ `register()` function now calls `/api/auth/register`
-- ✅ `login()` function now calls `/api/auth/login`
-- ✅ `logout()` function now calls `/api/auth/logout`
-- ✅ JWT token stored in `localStorage` under key `bioscout_token`
-- ✅ User data stored in `localStorage` under key `bioscout_user`
-- ✅ Error handling and loading states added
-- ✅ Token and user loaded from localStorage on component mount
-
-### 3. Chat History Context Updated (`src/context/ChatHistoryContext.jsx`)
-
-- ✅ Replaced localStorage with API calls
-- ✅ Conversations fetched from `/api/chats` on mount (when authenticated)
-- ✅ `createNewChat()` now calls `/api/chats` (POST)
-- ✅ `addMessageToChat()` now calls `/api/chats/{id}/messages` (POST)
-- ✅ `deleteChat()` now calls `/api/chats/{id}` (DELETE)
-- ✅ All functions are now async and properly awaited
-- ✅ Loading and error states added
-
-### 4. Authentication Pages Updated
-
-- ✅ **SignupPage.jsx**: Form submission calls `authContext.register()` instead of localStorage
-- ✅ **LoginPage.jsx**: Form submission calls `authContext.login()` instead of localStorage
-- ✅ Both pages show error messages from API responses
-- ✅ Both pages clear error on user input
-
-### 5. Components Updated
-
-- ✅ **Header.jsx**: Updated `handleConfirmLogout()` to await async logout function
-- ✅ **QueryPanel.jsx**: Updated to await chat history API calls
+BioScout is a full-stack web application that combines species identification, biodiversity observation mapping, and an AI-powered knowledge base to help users explore and document local wildlife. The platform leverages the iNaturalist API for species identification, PostgreSQL for data persistence, and RAG (Retrieval-Augmented Generation) for intelligent query responses.
 
 ---
 
-## Testing Results
+## ✨ Features
 
-### ✅ User Registration API
+### 🔍 Species Identification
+
+- Upload images of plants, animals, or insects
+- AI-powered species identification using iNaturalist Computer Vision API
+- Detailed species information including common names, scientific names, and Wikipedia links
+- Confidence scoring for identification accuracy
+
+### 🗺️ Interactive Observation Map
+
+- View biodiversity observations on an interactive Leaflet map
+- Filter observations by category (Plants, Animals, All)
+- Search observations by species name
+- Click markers to view detailed observation information
+- Visualize observation density and geographic distribution
+
+### 💬 AI-Powered Chat Interface
+
+- Ask questions about local biodiversity
+- RAG-based knowledge retrieval from curated biodiversity data
+- Context-aware responses using LlamaIndex
+- Persistent chat history stored in PostgreSQL
+- Multi-conversation support
+
+### 👤 User Authentication
+
+- Secure user registration and login
+- JWT-based authentication with 30-day token expiry
+- Password hashing with bcrypt
+- Google OAuth integration (optional)
+- User-specific data isolation
+
+### 📊 Data Management
+
+- Store and retrieve biodiversity observations
+- CSV-based data import/export
+- User-specific observation tracking
+- Automatic timestamp management
+
+---
+
+## 🏗️ Architecture
+
+### Backend (Flask)
+
+- **Framework**: Flask with Python 3.12+
+- **Database**: PostgreSQL
+- **Authentication**: JWT tokens with Flask-JWT-Extended
+- **APIs**:
+  - iNaturalist Computer Vision API
+  - OpenAI API (for embeddings)
+- **RAG Engine**: LlamaIndex with vector embeddings
+- **Image Processing**: PIL/Pillow
+
+### Frontend (React)
+
+- **Framework**: React 18 with Vite
+- **UI Library**: Custom CSS components
+- **Mapping**: Leaflet.js
+- **State Management**: React Context API
+- **HTTP Client**: Axios with interceptors
+- **Routing**: React Router v6
+
+---
+
+## 📁 Project Structure
 
 ```
-POST /api/auth/register
-Input: email=frontend_test@bioscout.com, name=Frontend Test, password=test123456
-Response: HTTP 201 CREATED
-Data Stored: User row in PostgreSQL users table
-```
+BioScout-main/
+├── bioscout-backend/             # Flask Backend
+│   ├── app.py                    # Main Flask application
+│   ├── config.py                 # Configuration (API keys, DB settings)
+│   ├── models/                   # Database models
+│   │   ├── user.py
+│   │   ├── observation.py
+│   │   └── knowledge_base.py
+│   ├── routes/                   # API route handlers
+│   │   ├── auth_routes.py        # Authentication endpoints
+│   │   ├── chat_routes.py        # Chat/conversation endpoints
+│   │   ├── identify_routes.py    # Species identification
+│   │   ├── observation_routes.py # Observation CRUD
+│   │   └── query_routes.py       # RAG query endpoints
+│   ├── services/                 # Business logic
+│   │   ├── ai_service.py         # OpenAI integration
+│   │   ├── inaturalist_service.py # iNaturalist API
+│   │   ├── rag_service.py        # RAG implementation
+│   │   └── species_identification_service.py
+│   ├── data/                     # Data storage
+│   │   ├── animals_observations.csv
+│   │   ├── plants_observations.csv
+│   │   ├── users.csv
+│   │   └── knowledge_files/      # RAG knowledge base
+│   ├── static/                   # Static assets
+│   └── templates/                # HTML templates
+│
+├── bioscout-frontend/           # React Frontend
+│   ├── src/
+│   │   ├── App.jsx              # Main app component
+│   │   ├── pages/               # Page components
+│   │   │   ├── HomePage.jsx     # Map view
+│   │   │   ├── ChatPage.jsx     # Chat interface
+│   │   │   ├── LoginPage.jsx    # Authentication
+│   │   │   └── SignupPage.jsx
+│   │   ├── components/          # Reusable components
+│   │   │   ├── MapView.jsx      # Leaflet map
+│   │   │   ├── QueryPanel.jsx   # Chat/query interface
+│   │   │   ├── FilterPanel.jsx  # Observation filters
+│   │   │   └── Header.jsx       # Navigation header
+│   │   ├── context/             # React Context
+│   │   │   ├── AuthContext.jsx
+│   │   │   └── ChatHistoryContext.jsx
+│   │   └── services/
+│   │       └── api.js           # Axios API client
+│   ├── package.json
+│   └── vite.config.js
+│
+└── api.py                       # Standalone CLI species identifier
 
-### ✅ User Login API
-
-```
-POST /api/auth/login
-Input: email=frontend_test@bioscout.com, password=test123456
-Response: HTTP 200 OK with JWT access_token
-Token Usable: Yes (verified with subsequent requests)
-```
-
-### ✅ Create Conversation API
-
-```
-POST /api/chats
-Header: Authorization: Bearer <token>
-Input: first_message="Show me all plants", response="I found 15 plants..."
-Response: HTTP 201 CREATED with conversation ID
-Data Stored:
-  - chat_conversations table: 1 row with user_id, title, timestamps
-  - chat_messages table: 2 rows (user message + assistant response)
-```
-
-### ✅ Get Conversations API
-
-```
-GET /api/chats
-Header: Authorization: Bearer <token>
-Response: HTTP 200 OK with array of user's conversations
-User Isolation: Only conversations for authenticated user returned (verified)
-```
-
-### ✅ Add Message to Conversation API
-
-```
-POST /api/chats/{conversation_id}/messages
-Header: Authorization: Bearer <token>
-Input: message="What about birds?", response="I found 8 bird species..."
-Response: HTTP 200 OK with updated conversation
-Data Stored:
-  - chat_messages table: 2 new rows added to same conversation
-  - Message count increased from 2 to 4
-  - Conversation updated_at timestamp updated
 ```
 
 ---
 
-## Database Verification
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Python 3.12+
+- Node.js 18+
+- PostgreSQL 14+
+- API Keys:
+  - OpenAI API key
+  - iNaturalist account (optional, API is public)
+
+### Backend Setup
+
+1. **Navigate to backend directory**
+
+   ```bash
+   cd bioscout_islamabad
+   ```
+
+2. **Create virtual environment**
+
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate  # Windows
+   source venv/bin/activate  # Linux/Mac
+   ```
+
+3. **Install dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configure environment variables**
+   - Copy `.env.example` to `.env`
+   - Add your API keys and database credentials:
+     ```env
+     OPENAI_API_KEY=your_openai_key_here
+     DATABASE_URL=postgresql://user:password@localhost:5432/bioscout_db
+     JWT_SECRET_KEY=your_jwt_secret_here
+     ```
+
+5. **Initialize database**
+
+   ```bash
+   python init_db.py
+   ```
+
+6. **Run the Flask server**
+   ```bash
+   python app.py
+   ```
+   Server runs on `http://localhost:5001`
+
+### Frontend Setup
+
+1. **Navigate to frontend directory**
+
+   ```bash
+   cd bioscout-frontend
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables** (optional)
+   - Copy `.env.example` to `.env` if you need custom settings
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+   Frontend runs on `http://localhost:3001`
+
+---
+
+## 🔌 API Endpoints
+
+### Authentication
+
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - User login (returns JWT)
+- `POST /api/auth/logout` - User logout
+- `GET /api/auth/me` - Get current user info
+
+### Chat & Conversations
+
+- `GET /api/chats` - Get all user conversations
+- `POST /api/chats` - Create new conversation
+- `GET /api/chats/<id>` - Get specific conversation
+- `POST /api/chats/<id>/messages` - Add message to conversation
+- `DELETE /api/chats/<id>` - Delete conversation
+
+### Species Identification
+
+- `POST /api/identify` - Identify species from uploaded image
+
+### Observations
+
+- `GET /api/observations` - Get all observations
+- `POST /api/observations` - Create new observation
+- `GET /api/observations/<id>` - Get specific observation
+- `PUT /api/observations/<id>` - Update observation
+- `DELETE /api/observations/<id>` - Delete observation
+
+### Queries (RAG)
+
+- `POST /api/query` - Submit natural language query to RAG system
+
+---
+
+## 🗄️ Database Schema
 
 ### Users Table
 
 ```sql
-SELECT id, email, name, created_at FROM users;
-
-id                                   | email                       | name            | created_at
--------------------------------------|-----------------------------|-----------------|-------------------
-93871486-faee-4d48-825a-ae1b726a4a37 | frontend_test@bioscout.com | Frontend Test   | 2026-01-22 04:08:01
+id           UUID PRIMARY KEY
+email        VARCHAR(120) UNIQUE
+name         VARCHAR(100)
+password_hash VARCHAR(255)
+created_at   TIMESTAMP
 ```
 
 ### Chat Conversations Table
 
 ```sql
-SELECT id, user_id, title, message_count, created_at FROM chat_conversations;
-
-id                                   | user_id                          | title               | message_count | created_at
--------------------------------------|----------------------------------|--------------------|---------------|-------------------
-47772764-742d-4c30-a9b2-1089d99a1c3d | 93871486-faee-4d48-825a-ae1b... | Show me all plants | 4              | 2026-01-22 04:08:24
+id            UUID PRIMARY KEY
+user_id       UUID FOREIGN KEY → users.id
+title         VARCHAR(200)
+message_count INTEGER
+created_at    TIMESTAMP
+updated_at    TIMESTAMP
 ```
 
 ### Chat Messages Table
 
 ```sql
-SELECT conversation_id, role, content, created_at FROM chat_messages;
+id              UUID PRIMARY KEY
+conversation_id UUID FOREIGN KEY → chat_conversations.id
+role            VARCHAR(20)  -- 'user' or 'assistant'
+content         TEXT
+created_at      TIMESTAMP
+```
 
-conversation_id                      | role      | content                                          | created_at
--------------------------------------|-----------|--------------------------------------------------|-------------------
-47772764-742d-4c30-a9b2-1089d99a1c3d | user      | Show me all plants                              | 2026-01-22 04:08:24
-47772764-742d-4c30-a9b2-1089d99a1c3d | assistant | I found 15 plants in the database...            | 2026-01-22 04:08:24
-47772764-742d-4c30-a9b2-1089d99a1c3d | user      | What about birds?                               | 2026-01-22 04:09:44
-47772764-742d-4c30-a9b2-1089d99a1c3d | assistant | I found 8 bird species in the database...       | 2026-01-22 04:09:44
+### Observations Table
+
+```sql
+id                UUID PRIMARY KEY
+user_id           UUID FOREIGN KEY → users.id
+species_name      VARCHAR(200)
+common_name       VARCHAR(200)
+category          VARCHAR(50)  -- 'plant', 'animal', 'insect'
+location_name     VARCHAR(200)
+latitude          DECIMAL
+longitude         DECIMAL
+observation_date  DATE
+image_url         VARCHAR(500)
+notes             TEXT
+created_at        TIMESTAMP
 ```
 
 ---
 
-## Server Status
+## 🛠️ Technology Stack
 
-### Flask Backend
+### Backend
 
-- ✅ Running on http://localhost:5001
-- ✅ Database connected to PostgreSQL (bioscout_db)
-- ✅ All API endpoints registered and working
-- ✅ JWT authentication enabled
-- ✅ CORS enabled for frontend requests
+- **Flask** - Web framework
+- **PostgreSQL** - Database
+- **SQLAlchemy** - ORM
+- **Flask-JWT-Extended** - JWT authentication
+- **Flask-CORS** - CORS handling
+- **LlamaIndex** - RAG framework
+- **OpenAI** - Embeddings and LLM
+- **Pillow** - Image processing
+- **Requests** - HTTP client
 
-### React Frontend
+### Frontend
 
-- ✅ Running on http://localhost:3001
-- ✅ API service configured with correct base URL
-- ✅ Contexts properly integrated with API calls
-- ✅ Authentication flow working end-to-end
-- ✅ Chat history synchronized with database
-
----
-
-## Features Implemented
-
-### Authentication Flow
-
-- [x] User registration via `/api/auth/register`
-- [x] Password hashing with bcrypt (bcrypt format: $2b$12$...)
-- [x] User login via `/api/auth/login`
-- [x] JWT token generation (30-day expiry)
-- [x] JWT token storage in localStorage
-- [x] Automatic token injection in API requests
-- [x] 401 error handling and redirect to login
-- [x] User logout via `/api/auth/logout`
-- [x] localStorage cleanup on logout
-
-### Chat History
-
-- [x] Create conversations via `/api/chats` (POST)
-- [x] Retrieve all conversations via `/api/chats` (GET)
-- [x] Retrieve single conversation via `/api/chats/{id}` (GET)
-- [x] Add messages to conversation via `/api/chats/{id}/messages` (POST)
-- [x] Delete conversations via `/api/chats/{id}` (DELETE)
-- [x] User isolation (users see only their own conversations)
-- [x] Automatic timestamp management (created_at, updated_at)
-- [x] Conversation title generation from first message
-
-### Error Handling
-
-- [x] Registration errors (duplicate email, password mismatch)
-- [x] Login errors (invalid credentials)
-- [x] API error responses with user-friendly messages
-- [x] Network error handling
-- [x] Token expiry handling (auto-redirect to login)
-- [x] Chat operation error handling
+- **React 18** - UI framework
+- **Vite** - Build tool
+- **React Router** - Routing
+- **Axios** - HTTP client
+- **Leaflet** - Interactive maps
+- **React-Leaflet** - Leaflet React bindings
 
 ---
 
-## Integration Points
+## 📝 Usage Examples
 
-### Frontend → Backend Communication
+### 1. Identify a Species (CLI)
 
-1. **Registration Flow**
-   - SignupPage form → AuthContext.register() → api.registerUser() → POST /api/auth/register
-   - Response: JWT token + user data → localStorage storage → Context state update → Redirect to map
-
-2. **Login Flow**
-   - LoginPage form → AuthContext.login() → api.loginUser() → POST /api/auth/login
-   - Response: JWT token + user data → localStorage storage → Context state update → Redirect to map
-
-3. **Chat History Load**
-   - ChatHistoryContext mount → api.getConversations() → GET /api/chats (with Bearer token)
-   - Response: Array of conversations → State update → UI renders
-
-4. **Query Processing**
-   - QueryPanel submit → RAG/API processing → Capture response → ChatHistoryContext
-   - If first message: api.createConversation() → POST /api/chats
-   - If follow-up: api.addMessageToConversation() → POST /api/chats/{id}/messages
-
-5. **Logout Flow**
-   - Header logout button → AuthContext.logout() → api.logoutUser() → POST /api/auth/logout
-   - localStorage cleanup → Context state reset → Redirect to login
-
----
-
-## No More Errors! 🎉
-
-✅ All authentication flows working
-✅ All chat operations working
-✅ All database operations working
-✅ All API endpoints responding correctly
-✅ User isolation enforced
-✅ Error handling in place
-✅ Token management working
-
----
-
-## What's Already Running
-
-### Terminal 1: Flask Backend
-
-```
-cd c:\Users\pc\Downloads\BioScout-main\BioScout-main\bioscout_islamabad
-python app.py
+```bash
+python api.py path/to/image.jpg
 ```
 
-Server is running on http://localhost:5001
+### 2. Ask a Biodiversity Question (Web)
 
-### Terminal 2: React Frontend
+1. Log in to the platform
+2. Navigate to Chat page
+3. Type: "What bird species are found in Margalla Hills?"
+4. Get AI-powered response with citations
 
+### 3. Add an Observation (Web)
+
+1. Upload an image on the Identify page
+2. Get species identification
+3. Save as observation with location and notes
+4. View on the interactive map
+
+---
+
+## 🔐 Security Features
+
+- ✅ Password hashing with bcrypt
+- ✅ JWT token authentication with expiry
+- ✅ User data isolation (users see only their own data)
+- ✅ CORS protection
+- ✅ SQL injection prevention via ORM
+- ✅ Environment variable protection
+- ✅ `.gitignore` configured to prevent API key leakage
+
+---
+
+## 📦 Deployment
+
+### Backend Deployment (e.g., Heroku, Railway)
+
+1. Set environment variables in hosting platform
+2. Configure PostgreSQL database
+3. Run database migrations
+4. Deploy Flask app
+
+### Frontend Deployment (e.g., Vercel, Netlify)
+
+1. Build production bundle: `npm run build`
+2. Configure backend API URL
+3. Deploy `dist/` folder
+
+---
+
+## 🧪 Testing
+
+### Backend Tests
+
+```bash
+cd bioscout_islamabad
+python -m pytest tests/
 ```
-cd c:\Users\pc\Downloads\BioScout-main\BioScout-main\bioscout-frontend
-npm run dev
+
+### Frontend Tests
+
+```bash
+cd bioscout-frontend
+npm test
 ```
 
-Server is running on http://localhost:3001
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ---
 
-## Next Steps (Optional Enhancements)
+## 📄 License
 
-1. **Frontend UI Testing** - Test signup/login/chat flows in browser
-2. **Password Reset** - Implement forgot password flow
-3. **Chat Permissions** - Verify users can only see their own chats
-4. **Message Editing** - Add ability to edit messages
-5. **Real-time Updates** - Use WebSockets for live message updates
-6. **User Profile** - Profile page to view/edit user info
-7. **Chat Sharing** - Share conversations with other users
-8. **Export Chats** - Export conversation history as PDF/CSV
-9. **Message Search** - Search messages across all conversations
-10. **Typing Indicators** - Show when other user is typing
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 
-## Files Modified
+## 👥 Authors
 
-1. `bioscout-frontend/src/services/api.js` - API service with JWT interceptor
-2. `bioscout-frontend/src/context/AuthContext.jsx` - Authentication with API calls
-3. `bioscout-frontend/src/context/ChatHistoryContext.jsx` - Chat history with API calls
-4. `bioscout-frontend/src/pages/LoginPage.jsx` - Login form with API integration
-5. `bioscout-frontend/src/pages/SignupPage.jsx` - Signup form with API integration
-6. `bioscout-frontend/src/components/Header.jsx` - Updated logout handler
-7. `bioscout-frontend/src/components/QueryPanel.jsx` - Updated to await chat operations
+- **Your Name** - Initial work
 
 ---
 
-## Summary
+## 🙏 Acknowledgments
 
-Your BioScout application is now **fully integrated**! Every action on the frontend is backed by real database operations:
+- iNaturalist for providing the Computer Vision API
+- OpenAI for GPT and embedding models
+- LlamaIndex for the RAG framework
+- The open-source community
 
-- **Signup** → User created in `users` table ✅
-- **Login** → JWT token generated and stored ✅
-- **New Chat** → Conversation created in `chat_conversations` table ✅
-- **Send Message** → Messages stored in `chat_messages` table ✅
-- **View History** → Conversations loaded from database ✅
-- **Logout** → Token and user data cleared ✅
+---
 
-The application is production-ready for your testing! 🚀
+## 📧 Contact
+
+For questions or support, please open an issue on GitHub.
+
+---
+
+**Made with ❤️ for biodiversity conservation in Islamabad**
