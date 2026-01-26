@@ -5,7 +5,6 @@ import "./Header.css";
 
 /**
  * Header Component
- * Navigation bar with logo and menu items
  */
 const Header = ({ onAddObservation }) => {
   const location = useLocation();

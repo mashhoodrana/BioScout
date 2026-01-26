@@ -41,7 +41,7 @@ const QueryPanel = ({
     },
   ];
 
-  // Handle external query submissions (e.g., from map popup "Learn more" button)
+  // Handle external query submissions 
   useEffect(() => {
     if (externalQuery) {
       setQuery(externalQuery);
