@@ -1,19 +1,27 @@
+<!-- BioScout Islamabad - Main HTML Entry Point -->
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Character encoding for proper text rendering -->
     <meta charset="UTF-8" />
+    <!-- Favicon for the browser tab -->
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Viewport settings for responsive design on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Page title displayed in browser tab -->
     <title>BioScout Islamabad</title>
+    <!-- Leaflet CSS for interactive map functionality -->
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
-    <!-- Google Sign-In Library -->
+    <!-- Google Sign-In Library for OAuth authentication -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body>
+    <!-- Root element where React application will be mounted -->
     <div id="root"></div>
+    <!-- Load the main React application via Vite -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
