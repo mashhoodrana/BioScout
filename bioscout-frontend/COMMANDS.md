@@ -13,17 +13,17 @@ cd "c:\Users\pc\Downloads\BioScout-main\BioScout-main\bioscout_islamabad"
 
 **Terminal 2 - React Frontend:**
 
-```powershell
-cd "c:\Users\pc\Downloads\BioScout-main\BioScout-main\bioscout-frontend"
-npm run dev
-```
-
 ### First Time Setup
 
 ```powershell
 # Install frontend dependencies
 cd "c:\Users\pc\Downloads\BioScout-main\BioScout-main\bioscout-frontend"
 npm install
+```
+
+# run the react project 
+cd "c:\Users\pc\Downloads\BioScout-main\BioScout-main\bioscout-frontend"
+npm run dev
 ```
 
 ### Useful Commands
@@ -55,7 +55,6 @@ npm run preview
 
 - **Flask Backend:** http://localhost:5001
 - **React Frontend:** http://localhost:3000
-- **React → Flask Proxy:** Automatic via Vite
 
 ## Stop Servers
 
