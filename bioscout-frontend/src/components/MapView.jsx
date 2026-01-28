@@ -160,7 +160,7 @@ const MapController = ({ observations }) => {
       })
       .filter((coord) => coord !== null);
 
-    // If we have valid coordinates, fit map to bounds
+    // If valid coordinates, fit map to bounds
     if (coordinates.length > 0) {
       const bounds = L.latLngBounds(coordinates);
       map.fitBounds(bounds, { padding: [50, 50] });
@@ -171,7 +171,6 @@ const MapController = ({ observations }) => {
 };
 
 /**
- * MapView Component
  * Displays observations on an interactive Leaflet map
  */
 const MapView = ({ observations = [], onMarkerClick, onSubmitQuery }) => {
@@ -202,7 +201,7 @@ const MapView = ({ observations = [], onMarkerClick, onSubmitQuery }) => {
         <MapController observations={observations} />
 
         {observations.map((obs) => {
-          // Parse coordinates
+          // Parse coordinates for each observation
           let coordinates;
           try {
             coordinates =
