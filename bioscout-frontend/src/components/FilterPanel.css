@@ -1,3 +1,4 @@
+/* Main filter panel container - positioned absolutely in top-left corner */
 .filter-panel {
   position: absolute;
   left: 20px;
@@ -11,6 +12,7 @@
   user-select: none;
 }
 
+/* Title styling with grab cursor to indicate draggability */
 .filter-title {
   margin: 0 0 8px 0;
   font-size: 0.9rem;
@@ -25,10 +27,12 @@
   color: #2e7d32;
 }
 
+/* Change cursor appearance while dragging */
 .filter-title:active {
   cursor: grabbing;
 }
 
+/* Individual filter section with spacing */
 .filter-section {
   margin-bottom: 10px;
 }
@@ -37,18 +41,21 @@
   margin-bottom: 0;
 }
 
+/* Flex layout for filter buttons - wrappable */
 .filter-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
+/* Grid layout alternative for filter buttons - 2 columns */
 .filter-buttons-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6px;
 }
 
+/* Filter button styling with hover and active states */
 .filter-btn {
   padding: 8px 12px;
   background-color: #f0f0f0;
@@ -64,21 +71,25 @@
   flex: 0 1 auto;
 }
 
+/* Hover state - slightly darker background */
 .filter-btn:hover {
   background-color: #e0e0e0;
 }
 
+/* Active/selected state - green theme */
 .filter-btn.active {
   background-color: #2e7d32;
   color: white;
   border-color: #1b5e20;
 }
 
+/* Type buttons with compact sizing */
 .filter-btn.type-btn {
   font-size: 0.8rem;
   padding: 8px 10px;
 }
 
+/* Information section at bottom with border separator */
 .filter-info {
   margin-top: 10px;
   padding-top: 10px;
