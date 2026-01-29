@@ -1,3 +1,4 @@
+/* Main authentication page container - centers content vertically and horizontally */
 .auth-page {
   display: flex;
   justify-content: center;
@@ -5,6 +6,7 @@
   padding: 40px 16px;
 }
 
+/* Authentication card - white container with shadow for login/signup form */
 .auth-card {
   width: 100%;
   max-width: 420px;
@@ -15,6 +17,7 @@
   padding: 24px;
 }
 
+/* Title - large heading for Login/Sign Up */
 .auth-title {
   margin: 0 0 8px 0;
   font-size: 1.5rem;
@@ -22,24 +25,28 @@
   color: #1b1b1b;
 }
 
+/* Subtitle - descriptive text below title */
 .auth-subtitle {
   margin: 0 0 20px 0;
   color: #555;
   font-size: 0.95rem;
 }
 
+/* Form container - vertical layout with spacing */
 .auth-form {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
+/* Form labels - bold descriptive text */
 .auth-form label {
   font-weight: 600;
   color: #333;
   font-size: 0.9rem;
 }
 
+/* Input field styling - with right padding for toggle button */
 .auth-input {
   width: 100%;
   padding: 12px;
@@ -54,10 +61,12 @@
     background 0.2s ease;
 }
 
+/* Input placeholder text color */
 .auth-input::placeholder {
   color: #888;
 }
 
+/* Input focus state - green border and subtle shadow */
 .auth-input:focus {
   border-color: #2e7d32;
   background: #fff;
@@ -65,10 +74,12 @@
   outline: none;
 }
 
+/* Input wrapper - relative positioning for absolute-positioned toggle */
 .input-wrapper {
   position: relative;
 }
 
+/* Toggle password visibility button - positioned inside input field */
 .toggle-visibility {
   position: absolute;
   right: 10px;
@@ -82,12 +93,14 @@
   padding: 4px 6px;
 }
 
+/* Error message styling - red text */
 .auth-error {
   color: #c62828;
   font-size: 0.9rem;
   margin: 4px 0 0 0;
 }
 
+/* Success message styling - green background with text */
 .auth-success {
   background-color: #e8f5e9;
   color: #2e7d32;
@@ -99,6 +112,7 @@
   font-weight: 500;
 }
 
+/* Action buttons container - vertical stacking */
 .auth-actions {
   display: flex;
   flex-direction: column;
@@ -106,6 +120,7 @@
   margin-top: 10px;
 }
 
+/* Primary button styling - green gradient background */
 .auth-btn {
   padding: 12px;
   border: none;
@@ -119,48 +134,57 @@
     box-shadow 0.2s ease;
 }
 
+/* Button hover state - slight lift and shadow */
 .auth-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(46, 125, 50, 0.25);
 }
 
+/* Button active state - returns to original position */
 .auth-btn:active {
   transform: translateY(0);
   box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
 }
 
+/* Secondary button variant - white with green border */
 .auth-secondary {
   background: #fff;
   color: #2e7d32;
   border: 1px solid #2e7d32;
 }
 
+/* Footer section - links to switch between login/signup */
 .auth-footer {
   margin-top: 14px;
   font-size: 0.9rem;
   color: #555;
 }
 
+/* Footer links - green color without underline */
 .auth-footer a {
   color: #2e7d32;
   font-weight: 600;
   text-decoration: none;
 }
 
+/* Footer link hover state - underline appears */
 .auth-footer a:hover {
   text-decoration: underline;
 }
 
+/* Google Sign-In button container - centered with full width */
 .google-signin-btn {
   display: flex;
   justify-content: center;
   margin-top: 10px;
 }
 
+/* Ensure Google sign-in widget spans full width */
 .google-signin-btn > div {
   width: 100% !important;
 }
 
+/* Global style for Google sign-in iframe */
 .google-signin-btn :global(.g_id_signin) {
   width: 100%;
 }
