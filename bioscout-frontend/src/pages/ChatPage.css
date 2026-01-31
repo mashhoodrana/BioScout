@@ -1,7 +1,11 @@
+/* ===========================
+   Main Container
+   =========================== */
 .chat-page {
   padding: 24px 16px;
 }
 
+/* Chat shell - Main wrapper for entire chat interface */
 .chat-shell {
   max-width: 1100px;
   margin: 0 auto;
@@ -12,6 +16,9 @@
   overflow: hidden;
 }
 
+/* ===========================
+   Header Section
+   =========================== */
 .chat-header {
   display: flex;
   justify-content: space-between;
@@ -26,6 +33,7 @@
   font-weight: 700;
 }
 
+/* New Chat Button - Primary action button */
 .new-chat-btn {
   padding: 8px 14px;
   border: none;
@@ -42,12 +50,19 @@
   box-shadow: 0 6px 16px rgba(46, 125, 50, 0.25);
 }
 
+/* ===========================
+   Body Layout (Grid)
+   =========================== */
+/* Two-column layout: history sidebar + chat panel */
 .chat-body {
   display: grid;
   grid-template-columns: 320px 1fr;
   min-height: 520px;
 }
 
+/* ===========================
+   History Panel (Sidebar)
+   =========================== */
 .history-panel {
   border-right: 1px solid #eee;
   padding: 16px;
@@ -73,6 +88,7 @@
   gap: 10px;
 }
 
+/* Individual history item card */
 .history-card {
   background: #fff;
   border: 1px solid #e2e2e2;
@@ -102,12 +118,16 @@
   font-size: 0.85rem;
 }
 
+/* ===========================
+   Chat Panel (Main Content)
+   =========================== */
 .chat-panel {
   display: flex;
   flex-direction: column;
   padding: 16px 18px;
 }
 
+/* Messages container - scrollable area */
 .chat-messages {
   flex: 1;
   overflow-y: auto;
@@ -117,6 +137,7 @@
   gap: 10px;
 }
 
+/* Individual message bubble - default (assistant) */
 .message-bubble {
   max-width: 70%;
   padding: 12px 14px;
@@ -126,6 +147,7 @@
   color: #333;
 }
 
+/* User message styling - right-aligned with green theme */
 .message-bubble.user {
   margin-left: auto;
   background: #e8f5e9;
@@ -138,6 +160,10 @@
   font-size: 0.8rem;
 }
 
+/* ===========================
+   Input Area
+   =========================== */
+/* Input container - textarea + send button */
 .chat-input {
   margin-top: 14px;
   display: grid;
@@ -162,6 +188,7 @@
   box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
 }
 
+/* Send button - primary action */
 .chat-send {
   border: none;
   border-radius: 10px;
@@ -184,6 +211,10 @@
   box-shadow: 0 6px 12px rgba(46, 125, 50, 0.2);
 }
 
+/* ===========================
+   Empty States
+   =========================== */
+/* Empty state - shown when no chat is active */
 .empty-state {
   margin: auto;
   text-align: center;
@@ -202,6 +233,11 @@
   color: #999;
   font-size: 0.85rem;
 }
+
+/* ===========================
+   Responsive Design
+   =========================== */
+/* Tablet and mobile layout */
 @media (max-width: 960px) {
   .chat-body {
     grid-template-columns: 1fr;
