@@ -1,4 +1,4 @@
-# BioScout Islamabad - React Frontend
+# BioScout Islamabad
 
 Modern React-based frontend for the BioScout biodiversity monitoring platform.
 
@@ -73,7 +73,7 @@ server: {
 }
 ```
 
-## 🧩 Key Components
+## Key Components
 
 ### MapView
 
