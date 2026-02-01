@@ -20,6 +20,13 @@ import "./App.css";
  * Main App Component
  * Handles routing and global state
  */
+
+/**
+ * PrivateRoute Component
+ * Protects routes by redirecting unauthenticated users to login page
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Child components to render if authenticated
+ */
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
 
@@ -31,17 +38,31 @@ const PrivateRoute = ({ children }) => {
 };
 
 function App() {
+  // State to control the visibility of the observation modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Key used to trigger re-render of HomePage after new observation is added
   const [refreshKey, setRefreshKey] = useState(0);
 
+  /**
+   * Opens the observation modal for adding a new observation
+   */
   const handleAddObservation = () => {
     setIsModalOpen(true);
   };
 
+  /**
+   * Closes the observation modal
+   */
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
+  /**
+   * Handles successful observation submission
+   * Refreshes the observations list and shows success message
+   * @param {Object} newObservation - The newly created observation data
+   */
   const handleObservationSuccess = (newObservation) => {
     console.log("New observation created:", newObservation);
     // Trigger refresh of observations
