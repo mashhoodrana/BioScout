@@ -1,3 +1,8 @@
+/* ===================================
+   MODAL OVERLAY & CONTAINER
+   Fullscreen backdrop and centered modal content
+   =================================== */
+
 /* Modal Overlay */
 .modal-overlay {
   position: fixed;
@@ -22,6 +27,11 @@
   overflow-y: auto;
   box-shadow: 0 10px 50px rgba(0, 0, 0, 0.25);
 }
+
+/* ===================================
+   MODAL HEADER
+   Title bar with gradient background and close button
+   =================================== */
 
 .modal-header {
   display: flex;
@@ -61,6 +71,11 @@
   transform: rotate(90deg);
 }
 
+/* ===================================
+   ERROR & PROGRESS INDICATORS
+   Status messages and loading progress display
+   =================================== */
+
 .error-message {
   background-color: #ffebee;
   color: #c62828;
@@ -93,6 +108,11 @@
   padding: 10px;
   font-weight: 500;
 }
+
+/* ===================================
+   MODAL BODY & FORM NAVIGATION
+   Main content area and tab controls
+   =================================== */
 
 .modal-body {
   padding: 24px;
@@ -133,6 +153,7 @@
   background-color: rgba(46, 125, 50, 0.08);
 }
 
+/* Tab content with fade-in animation */
 .tab-content {
   animation: fadeIn 0.3s ease;
 }
@@ -151,6 +172,11 @@
   color: #333;
   font-size: 1.2rem;
 }
+
+/* ===================================
+   FORM GROUPS & INPUT FIELDS
+   Styling for all form inputs, labels, and validation
+   =================================== */
 
 .form-group {
   margin-bottom: 20px;
@@ -205,6 +231,7 @@
   box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
 }
 
+/* Date and time picker styling */
 .form-group input[type="datetime-local"] {
   width: 100%;
   padding: 12px 14px;
@@ -246,6 +273,11 @@
   color: #666;
   font-size: 0.85rem;
 }
+
+/* ===================================
+   FILE UPLOAD & IMAGE PREVIEW
+   Image upload area and preview with remove button
+   =================================== */
 
 .file-input {
   display: block;
@@ -300,6 +332,11 @@
   background-color: rgba(255, 0, 0, 1);
 }
 
+/* ===================================
+   LOCATION MAP & COORDINATES
+   Map container and coordinate display
+   =================================== */
+
 .location-map-container {
   margin-top: 12px;
   border-radius: 8px;
@@ -316,6 +353,11 @@
   color: #2e7d32;
   font-weight: 500;
 }
+
+/* ===================================
+   FORM ACTION BUTTONS
+   Previous, Next, and Submit button styles
+   =================================== */
 
 .form-actions {
   display: flex;
@@ -362,6 +404,7 @@
   box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
 }
 
+/* Disabled submit button state */
 .btn-submit:disabled {
   background-color: #90caf9;
   cursor: not-allowed;
