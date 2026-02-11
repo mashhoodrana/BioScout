@@ -155,7 +155,7 @@ BioScout-main/
    ```bash
    python -m venv venv
    venv\Scripts\activate  # Windows
-   source venv/bin/activate  # Linux/Mac
+   source venv/bin/activate  # Linux
    ```
 
 3. **Install dependencies**
