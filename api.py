@@ -43,7 +43,7 @@ class iNaturalistSpeciesIdentifier:
                     headers=headers
                 )
                 
-                response.raise_for_status()  # Raise exception for HTTP errors
+                response.raise_for_status()  
                 
                 return response.json().get("results", [])
                 
@@ -83,7 +83,6 @@ class iNaturalistSpeciesIdentifier:
             print(f"{i+1}. {common_name} ({scientific_name})")
             print(f"   Confidence: {score:.2f}%")
             
-            # Additional information if available
             if "iconic_taxon_name" in taxon:
                 print(f"   Category: {taxon['iconic_taxon_name']}")
                 
@@ -98,7 +97,7 @@ def main():
     """
     Main function to run the species identifier
     """
-    # Check if an image path was provided
+    
     if len(sys.argv) < 2:
         print("Usage: python species_identifier.py <image_path>")
         print("Example: python species_identifier.py butterfly.jpg")
@@ -106,12 +105,10 @@ def main():
     
     image_path = sys.argv[1]
     
-    # Check if the file exists
     if not os.path.isfile(image_path):
         print(f"Error: File '{image_path}' does not exist")
         return
     
-    # Check if the file is an image
     valid_extensions = ['.jpg', '.jpeg', '.png']
     if not any(image_path.lower().endswith(ext) for ext in valid_extensions):
         print(f"Error: File '{image_path}' is not a supported image format")
