@@ -115,7 +115,7 @@ def main():
         print(f"Supported formats: {', '.join(valid_extensions)}")
         return
     
-    # Create the identifier and process the image
+    
     identifier = iNaturalistSpeciesIdentifier()
     results = identifier.identify_species(image_path)
     identifier.print_results(results)
@@ -126,7 +126,5 @@ def main():
         print(f"Confidence: {results[0]['score'] * 100:.2f}%")
 
 
-if __name__ == "__main__":
-    # Required packages: requests, requests_toolbelt
-    # pip install requests requests_toolbelt
+if __name__ == "__main__":x
     main()
